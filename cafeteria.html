@@ -1,0 +1,186 @@
+<! doctype>
+	< html >
+		<head>
+		
+		< title > Pingadinho </ title >
+		< script  src = " ./jquery-3.2.1.js " > < / script >
+		< script  src = " ./produtos.js " > < / script >
+		< script >
+			$ ( function () {
+				plotarCardapio ();
+					AjouterPedido ({id : 1 , nome : " Expresso " , preco : 4.00 });
+					AjouterPedido ({id : 1 , nome : " Expresso " , preco : 4.00 });
+				console . log (
+					pedido
+				);
+				// remocao ({id: 1, nome: "Expresso", preco: 4.00});
+				remocao ({id : 1 , nome : " Expresso " , preco : 4.00 });
+				plotarPedido ();
+				botaoDeAdc ();
+				botaoDeremv ();
+				existeCardapio ({id : 1 , nome : " Expresso " , preco : 4.00 });
+				progBtnAddCard ();
+			});
+	
+			função  plotarCardapio () {
+			$ ( ' .produto ' ). html ( ' ' );
+				$ . cada (produtos, função ( indice , produto ) {
+				$ ( ' .produto ' )
+				. anexar ( " <tr> <td> " + PRODUTO . Nome + " </ td> <td> " + PRODUTO . preco + " </ td> <td> " +  " <button id = \" Prod_ " + PRODUTO . ID + " \" class = \ " Preço total: Adicionar \" > + </ button> </ td> </ tr> " )
+				});
+			}
+			
+			var pedido = [];
+			
+			function  plotarPedido () {
+			$ ( ' .pedid ' ). html ( ' ' );
+				$ . cada (pedido, função ( indice , item ) {
+				$ ( ' .pedid ' )
+				. anexar ( " <tr> <td> " + artigo . Quantidade + " </ td> <td> " + artigo . PRODUTO . Nome + " </ td> <td> " + artigo . PRODUTO . preco + " </ td> <td> " + " <botão id = \ " item_ " + item . produto . id + " \"> - </ button> </ td> </ tr> " )
+				});
+			}
+			função  botaoDeAdc () {
+				$ ( ' .icionicionar ' ). bind ( ' clique ' , function () {
+					var id =  $ ( this ). attr ( ' id ' );
+					id =  id . split ( ' _ ' );
+					id = id [ 1 ];
+					var produtoDoId =  prodporid (id);
+					adicionarPedido (produtoDoId);
+				});
+			}
+			
+			função  botaoDeremv () {
+				$ ( documento ). on ( ' clique ' , ' .remover ' , function () {
+					var id =  $ ( this ). attr ( ' id ' );
+					id =  id . split ( ' _ ' );
+					id = id [ 1 ];
+					var produtoDoId =  prodporid (id);
+					remocao (produtoDoId);
+				});
+			}
+			
+			
+			// funcao que verifica se ja foi adicionado, se ja, então vai incrementar na quantidade
+			
+			função  existeProduto ( prod ) {
+			
+				var existeItem =  false ;
+				
+				$ . cada (pedido, função ( indice , item ) {
+					se ( item . produto . id == prod . id )
+					{
+						existeItem = indice;
+						
+						retorno  nulo ;
+					}
+				});
+				retorno existeItem;
+			}
+			
+			função  existeCardapio ( prod ) {
+			
+				var existeProduto =  false ;
+				
+				$ . cada (produtos, função ( indice , produto ) {
+					se ( produto . nome == prod . nome )
+					{
+						existeItem = indice;
+						
+						retorno  nulo ;
+					}
+				});
+				retorno existeProduto;
+			}
+			
+			// adicionar se nao teve
+			função  AjouterPedido ( prod ) {
+			var existe =  existeProduto (prod);
+				se (existe ===  falso ) / * 3 iguais compara valor e tipo * /
+					pedido . push ({
+						produto : prod, quantity : 1
+					});
+				outro
+					pedido [existe]. quantidade ++ ;
+				plotarPedido ();
+			}
+			
+			função  prodporid ( id ) {
+			var retorno = nulo ;
+				$ . cada (produtos, função ( indice , produto ) {
+					se (id == produto . id )
+					{
+					 retorno = produto;
+					}
+				});
+				retornar retorno;
+			}
+			// excluir e fígado
+			
+			função  remocao ( prod ) {
+				var excluir =  existeProduto (prod);
+				se (pedido [excluir]. quantity > 1 )
+				{
+					pedido [excluir]. quantidade - ;
+				}
+				outro 
+					pedido . emenda (excluir, 1 );
+					plotarPedido ();
+			}
+			
+			função  adicionarNoCardapio ( prod ) {
+			var existe =  existeProduto (prod);
+				se (existe ===  falso ) / * 3 iguais compara valor e tipo * /
+					produtos . push (prod);
+				plotarCardapio ();
+			}
+			
+			
+			função  progBtnAddCard () {
+				$ ( ' #btn ' ). clique ( function () {
+				var id = produtos [ produtos . comprimento - 1 ]. id + 1 ;
+				var nome =  $ ( ' #nome ' ). val ();
+				var preco =  $ ( ' #preco ' ). val ();
+				
+				var p = {id : id, nome : nome, preco : preco};
+				AdicionarNoCardapio (p);
+				});
+			}
+		< / script >
+		</ head >
+		< corpo >
+
+			Produto < input  type = " text "  name = " nome "  id = " nome " />
+			Preço do Produto < input  type = " number "  name = " preco "  id = " preco " />
+				< button  id = " btn " > Adicionar </ button >
+
+			< table  border = " 1 " >
+				< thead >
+					< tr >
+						< th > Nomes </ th >
+						< th > Preços </ th >
+						< th > </ th >
+					</ tr >		
+				</ thead >
+				< tbody  class = " produto " >
+
+				</ tbody >	
+			</ table >
+			< table  border = " 1 " >
+				< thead >
+					< tr >
+						< th > Quantidade </ th >
+						< th > Produto </ th >
+						< th > Preço Unitário </ th >
+						< th > </ th >
+					</ tr >		
+				</ thead >
+				< tbody  class = " pedid " >
+
+				</ tbody >
+				< tfoot >
+					< th > Total: </ th >
+				< tfoot >
+			</ table >
+
+		</ body >
+	</ html >

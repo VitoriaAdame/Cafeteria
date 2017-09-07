@@ -1,28 +1,51 @@
-head{
-		background-image: src=("https://www.google.com.br/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjun6K365HWAhUE8WMKHXztBYUQjRwIBw&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F498492252487627203%2F&psig=AFQjCNFicP5du6qWelJxIxGs1Hst7YnbGg&ust=1504830674080953");
-}
+
 
 body{
- background-image: src=("https://www.google.com.br/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjun6K365HWAhUE8WMKHXztBYUQjRwIBw&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F498492252487627203%2F&psig=AFQjCNFicP5du6qWelJxIxGs1Hst7YnbGg&ust=1504830674080953");
+ background-color:##F9CDAD;
  text-align: center;
  padding-top:20px;
  font-family: 'Gloria Hallelujah', cursive;
+ color: #0B486B;
 
 
  }
+ p{
+	 font-size:50px;
+	 text-align:center;
+	 font-style: bold;
+	 color:#C44D58;
+ }
+ #nome{
+	 margin-top:20px;
+ }
+ 
  #preco{
-	 padding
+	margin-top:20px; 
  }
+ 
+ #bnt{
+	 border-radius:10px;
+ }
+ 
  #tabela{
 	 float: left;
 	 margin-top:50px;
 	 margin-left:70px;
-	 border-radius:10px;
+	 border-radius:15px;
+	 
  }
+ 
  #tabela2{
 	 margin: 0 auto;
 	 width: 700px;
 	 margin-top:200px;
-	 border-radius:10px;
+	 border-radius:30px;
+	 
+ }
+ 
+  th, td{
+	 text-align: center;
+	 border:0px;
+
  }
  

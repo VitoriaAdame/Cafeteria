@@ -1,0 +1,50 @@
+
+.bdy{
+ background-image: url("./background.jpg");
+ text-align: center;
+ padding-top:20px;
+ font-family: 'Gloria Hallelujah', cursive;
+ color: #0B486B;
+
+
+ }
+ p{
+	 font-size:50px;
+	 text-align:center;
+	 font-style: bold;
+	 color:#C44D58;
+ }
+ #nome{
+	 margin-top:20px;
+ }
+ 
+ #preco{
+	margin-top:20px; 
+ }
+ 
+ #bnt{
+	 border-radius:10px;
+ }
+ 
+ #tabela{
+	 float: left;
+	 margin-top:50px;
+	 margin-left:70px;
+	 border-radius:15px;
+	 
+ }
+ 
+ #tabela2{
+	 margin: 0 auto;
+	 width: 700px;
+	 margin-top:200px;
+	 border-radius:30px;
+	 
+ }
+ 
+  th, td{
+	 text-align: center;
+	 border:0px;
+
+ }
+ 

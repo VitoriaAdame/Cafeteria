@@ -1,232 +1,461 @@
-				
+	<!doctype  html>
 
-	 <!doctype html>
+
 
 	<html>
 
+
+
 		<head>
+
 		<meta charset="utf-8"/>
+
 		<title>Cafeteria</title>
+
 		<script src="./js/jquery.min.js"></script>
+
 		<script src="./js/produtos.js"></script>
+
 		<link rel="stylesheet" href="./estilo.css"/>
+
 		<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet"> 
 
+
+
 		<script>
+
 			$(function(){
+
 				plotarCardapio();
+
 					adicionarPedido({id:1, nome:"Expresso",preco:4.00});
+
 					adicionarPedido({id:1, nome:"Expresso",preco:4.00});
+
 					console.log(
+
 	
+
 					pedido
+
 				);
+
 				//remocao({id:1, nome:"Expresso",preco:4.00});
+
 				remocao({id:1, nome:"Expresso",preco:4.00});
+
 				plotarPedido();
+
 				botaoDeAdc();
+
 				botaoDeremv();
+
 				existeCardapio({id:1, nome:"Expresso",preco:4.00});
+
 				progBtnAddCard();
+
 			});
+
 	
+
 			function plotarCardapio(){
+
 			$('.produto').html('');
+
 				$.each(produtos,function(indice,produto){
+
 				$('.produto')
+
 				.append("<tr><td>"+produto.nome+"</td><td>"+produto.preco+"</td><td>"+ "<button id=\"prod_"+produto.id+"\"class=\"adicionar\">+</button></td></tr>")
+
 				});
+
 			}
+
 			
+
 			var pedido = [];
+
 			
+
 			function plotarPedido(){
+
 			$('.pedid').html('');
+
 				$.each(pedido, function(indice, item){
+
 				$('.pedid')
+
 				.append("<tr><td>"+item.quantidade+"</td><td>"+item.produto.nome+"</td><td>"+item.produto.preco+"</td><td>"+"<button id=\"item_"+item.produto.id+"\"class=\"remover\">-</button></td></tr>")
+
 				});
+
 			}
+
 			function botaoDeAdc(){
+
 				$('.adicionar').bind('click', function(){
+
 					var id = $(this).attr('id');
+
 					id = id.split('_');
+
 					id = id[1];
+
 					var produtoDoId = prodporid(id);
+
 					adicionarPedido(produtoDoId);
+
 				});
+
 			}
+
 			
+
 			function botaoDeremv(){
+
 				$(document).on('click','.remover', function(){
+
 					var id = $(this).attr('id');
+
 					id = id.split('_');
+
 					id = id[1];
+
 					var produtoDoId = prodporid(id);
+
 					remocao(produtoDoId);
+
 				});
+
 			}
+
 			
+
 			
+
 			// funcao que verifica se ja foi adicionado, se ja, so vai incrementar na quantidade
+
 			
+
 			function existeProduto(prod){
+
 			
+
 				var existeItem = false;
+
 				
+
 				$.each(pedido, function(indice, item){
+
 					if(item.produto.id==prod.id)
+
 					{
+
 						existeItem = indice;
+
 						
+
 						return null;
+
 					}
+
 				});
+
 				return existeItem;
+
 			}
+
 			
+
 			function existeCardapio(prod){
+
 			
+
 				var existeProduto = false;
+
 				
+
 				$.each(produtos, function(indice, produto){
+
 					if(produto.nome==prod.nome)
+
 					{
+
 						existeItem = indice;
+
 						
+
 						return null;
+
 					}
+
 				});
+
 				return existeProduto;
+
 			}
+
 			
+
 			//adicionar se nao tiver
+
 			function adicionarPedido(prod){
+
 			var existe = existeProduto(prod);
+
 				if(existe === false)/* 3 iguais compara valor e tipo */
+
 					pedido.push({
+
 						produto:prod, quantidade:1
+
 					});
+
 				else
+
 					pedido[existe].quantidade++;
+
 				plotarPedido();
+
 			}
+
 			
+
 			function prodporid(id){
+
 			var retorno=null;
+
 				$.each(produtos,function(indice,produto){
+
 					if(id==produto.id)
+
 					{
+
 					 retorno=produto;
+
 					}
+
 				});
+
 				return retorno;
+
 			}
+
 			//excluir e remover cuidados
+
 			
+
 			function remocao(prod){
+
 				var excluir = existeProduto(prod);
+
 				if(pedido[excluir].quantidade>1)
+
 				{
+
 					pedido[excluir].quantidade--;
+
 				}
+
 				else 
+
 					pedido.splice(excluir, 1);
+
 					plotarPedido();
+
 			}
+
 			
+
 			function adicionarNoCardapio(prod){
+
 			var existe = existeProduto(prod);
+
 				if(existe === false)/* 3 iguais compara valor e tipo */
+
 					produtos.push(prod);
+
 				plotarCardapio();
+
 			}
+
 			
+
 			
+
 			function progBtnAddCard(){
+
 				$('#btn').click(function(){
+
 				var id = produtos[produtos.length-1].id+1;
+
 				var nome = $('#nome').val();
+
 				var preco = $('#preco').val();
+
 				
+
 				var p = {id: id, nome: nome, preco: preco};
+
 				adicionarNoCardapio(p);
+
 				});
+
 			}
+
 		</script>
 
+
+
 		</head>
+
+
 
 		<body class="bdy">
 
 
 
+
+			<p> Cafeteria Espaço café</p>
+
+
 			Novo Produto <input type="text" name="nome" id="nome" />
 
+
+
 			Preço do Produto <input type="number" name="preco" id="preco" />
+
+
 
 				<button id="btn"> Adicionar </button>
 
 
 
+
+
+
+
 			<table border="1" color="#CDB38B" id="tabela">
+
+
 
 				<thead>
 
+
+
 					<tr>
+
+
 
 						<th>Nomes</th>
 
+
+
 						<th>Preços</th>
+
+
 
 						<th></th>
 
+
+
 					</tr>		
 
+
+
 				</thead>
+
+
 
 				<tbody class="produto">
 
 
 
+
+
+
+
 				</tbody>	
 
+
+
 			</table>
+
+
 
 			<table border="1" id="tabela2">
 
+
+
 				<thead>
+
+
 
 					<tr>
 
+
+
 						<th>Quantidade</th>
+
+
 
 						<th>Produto</th>
 
+
+
 						<th>Preço Unitário</th>
+
+
 
 						<th> </th>
 
+
+
 					</tr>		
+
+
 
 				</thead>
 
+
+
 				<tbody class="pedid">
+
+
 
 					
 
+
+
 				</tbody>
 
-				<tfoot>
 
-					<th>Total:</th>
 
-				<tfoot>
+
 
 			</table>
 
+
+
 			
+
+
 
 		</body>
 
-	</html>
+
+
+	</html>			
+
+	
+			
+			
+					
+
+
+			
+
+						
+
+	
